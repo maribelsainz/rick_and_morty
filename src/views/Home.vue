@@ -22,12 +22,20 @@
             <img :src="item.image" class="card-img-top" :alt="item.index" />
             <div class="card-body">
               <h5 class="card-title">{{item.name}}</h5>
-              <a class="btn btn-success mx-3">Opinar</a>
+              <!-- Botón a Modal modal para opinar sobre personaje-->
+              <button
+                type="button"
+                class="btn btn-success mx-3"
+                data-toggle="modal"
+                data-target="#exampleModalOpinar"
+              >Opinar</button>
+
+              <!-- Botón a Modal de Ver Más -->
               <button
                 type="button"
                 class="btn btn-success"
                 data-toggle="modal"
-                data-target="#exampleModal"
+                data-target="#exampleModalVerMas"
               >Ver Más</button>
             </div>
           </div>
@@ -38,7 +46,7 @@
     <!-- Modal Ver Más-->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="exampleModalVerMas"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -47,12 +55,31 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Rick Sanchez</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body container-fluid">
+            <div class="row">
+              <div class="col-md-6 ml-auto">
+                <img
+                  class="img-fluid"
+                  src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+                  alt="imagen"
+                />
+              </div>
+              <div class="col-md-6 ml-auto">
+                <ul class="text-center">
+                  <li>Status del personaje</li>
+                  <li>Especie del personaje</li>
+                  <li>Nombre de la ubicación del personaje</li>
+                  <li>Cantidad de episodios</li>
+                  <li>Fecha de creación</li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-success">Agregar a Favoritos</button>
@@ -60,8 +87,50 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal para opinar-->
+    <div
+      class="modal fade"
+      id="exampleModalOpinar"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nombre de Personaje</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control my-3"
+                  id="formGroupExampleInput"
+                  placeholder="Ingresa tu nombre"
+                />
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  placeholder="Ingresa tu opinión aquí..."
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- @click="enviarInfoComentario(index)" -->
 </template>
 
 <script>
@@ -71,6 +140,9 @@ export default {
   data() {
     return {
       busqueda: ""
+      // nombre: this.$store.getters.envioPersonajes[this.$route.params.index].name,
+      // indexURL: this.$route.params.index,
+      // imagen: this.$store.getters.envioPersonajes[this.$route.params.index].image
     };
   },
   computed: {
